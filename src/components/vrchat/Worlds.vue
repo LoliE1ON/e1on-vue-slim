@@ -63,8 +63,6 @@ export default {
     },
     methods: {
         loadWorlds () {
-
-            console.log(this.worlds);
             
             if (this.worlds.length == 0) {
                 this.request ();

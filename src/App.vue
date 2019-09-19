@@ -3,12 +3,12 @@
 
     <div>
 
-        <Header></Header>
+        <Header/>
 
         <div class="uk-grid-collapse" uk-grid>
 
             <div class="uk-width-1-4 app-sidebar" uk-height-viewport="expand: true">
-                <Sidebar></Sidebar>
+                <Sidebar/>
             </div>
 
             <div class="uk-width-expand" style="padding: 20px;">
@@ -18,7 +18,7 @@
             
         </div>
 
-        <Footer></Footer>
+        <Footer/>
 
     </div>
 
@@ -27,7 +27,6 @@
 
 <script>
 
-// components
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import Footer from './components/Footer'

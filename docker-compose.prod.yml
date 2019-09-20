@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+  mysql:
+    container_name: "MySQL"
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./server/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: [
+      '--default_authentication_plugin=mysql_native_password',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci'
+    ]
+
+  nginx:
+    container_name: "Nginx"
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker-images/nginx/conf.d:/etc/nginx/conf.d
+      - ./server/www:/var/server
+      - ./server/logs:/var/log/nginx/server
+      - ./client/public:/var/client
+      - ./client/logs:/var/log/nginx/client
+      - ./server/tables:/docker-entrypoint-initdb.d
+    links:
+      - mongo
+  php:
+    container_name: "PHP-FPM"
+    build: docker-images/php
+    user: "${UID}:${GID}"
+    links:
+      - mysql
+    volumes:
+      - ./server/www:/var/server
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}

@@ -1,0 +1,77 @@
+version: '2'
+
+services:
+  mysql:
+    container_name: "MySQL"
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./server/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: [
+      '--default_authentication_plugin=mysql_native_password',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci'
+    ]
+
+  adminer:
+    container_name: "Adminer"
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    links:
+      - mysql
+
+  nginx:
+    container_name: "Nginx"
+    restart: always
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker-images/nginx/conf.d:/etc/nginx/conf.d
+      - ./server/www:/var/server
+      - ./server/logs:/var/log/nginx/server
+      - ./client/public:/var/client
+      - ./client/logs:/var/log/nginx/client
+    links:
+      - php
+  php:
+    container_name: "PHP-FPM"
+    user: "${UID}:${GID}"
+    restart: always
+    build: docker-images/php
+    links:
+      - mysql
+    volumes:
+      - ./server/www:/var/server
+    ports:
+      - 10000
+    environment:
+      XDEBUG_CONFIG: remote_host=192.168.1.73
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  node:
+    restart: "on-failure"
+    container_name: "NodeJS"
+    image: "node:10"
+    user: "${UID}:${GID}"
+    working_dir: /home/node/client
+    environment:
+      NODE_ENV: "development"
+    volumes:
+      - ./client:/home/node/client
+    ports:
+      - "35729:35729"
+    command: >
+      bash -c "npm install
+      && npm run autobuild"

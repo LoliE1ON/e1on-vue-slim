@@ -6,8 +6,8 @@ if ! type "docker-compose" > /dev/null; then
   exit 1
 fi
 
-# TODO: Реализовать создание переменных окружения из файла .env
-# ...
+# Инжект переменных окружения
+source .env
 
 # Если есть аргумент при запуске - проверяем, равен ли он prod || dev, иначе ставим как dev
 # Если аргумента нет - так же dev
@@ -16,6 +16,8 @@ if [ -z "$WORKSPACE" ] || [ "$WORKSPACE" != 'prod' ]; then
   WORKSPACE="dev"
 fi
 
+# Docker юзер
+export DOCKER_USER="$UID:$GID"
 # Путь к файлам сервера
 SERVER_PATH="$PWD/server"
 # Путь к файлам клиента
@@ -40,21 +42,16 @@ fi
 
 # Прокидывание имени серверов в конфигурацию nginx
 sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_CLIENT};/" docker-images/nginx/conf.d/client.conf
+sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_CLIENT};/" docker-images/nginx/conf.d/client-proxy.conf
 sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_SERVER};/" docker-images/nginx/conf.d/server.conf
 
 # Прокидывание адреса сервера в конфиг клиента
-echo "export const API_ADDRESS = '${SERVER_NAME_SERVER}'" > client/src/configs/api.js
+echo "export const API_ADDRESS = '${SERVER_NAME_SERVER}'" > client/src/config/apiAddress.js
 
 # Прокидывание данных в конфигурацию Sphix для доступа к базе данных
 sed -ri "s/name[^;]*/name: '${MYSQL_DATABASE}'/" server/www/phinx.yml
 sed -ri "s/user[^;]*/user: '${MYSQL_USER}'/" server/www/phinx.yml
 sed -ri "s/pass[^;]*/pass: '${MYSQL_PASSWORD}'/" server/www/phinx.yml
-
-# Создание папки и установка прав на неё, если её нет
-if [ ! -d "server/www/uploaded_files" ]; then
-  mkdir server/www/uploaded_files
-  chmod -R 0777 server/www/uploaded_files
-fi
 
 # Сборка сервера, установка зависимостей в отдельном composer контейнере
 docker run --rm --interactive --tty \

@@ -18,7 +18,12 @@ export default new Vuex.Store({
         },
         changeIsLogged (state, bool) {
             state.isLogged = bool;
-        }
+		},
+		logoutUser (state, data) {
+			state.data = data;
+			state.token = "";
+			state.isLogged = false;
+		}
     },
     actions: {
 
@@ -26,6 +31,9 @@ export default new Vuex.Store({
     getters: {
         isLogged (state) {
             return state.isLogged;
-        }
+		},
+        getToken (state) {
+            return state.token;
+        },
     }
 })

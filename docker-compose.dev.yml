@@ -24,7 +24,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8080:8080"
+      - "8000:8000"
     links:
       - mysql
 
@@ -36,16 +36,16 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker-images/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker-images/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
+      - ./docker-images/nginx/conf.d/client-proxy.conf:/etc/nginx/conf.d/client.conf
       - ./server/www:/var/server
       - ./server/logs:/var/log/nginx/server
-      - ./client/public:/var/client
-      - ./client/logs:/var/log/nginx/client
     links:
       - php
+      - node
   php:
     container_name: "PHP-FPM"
-    user: "${UID}:${GID}"
+    user: "$DOCKER_USER"
     restart: always
     build: docker-images/php
     links:
@@ -64,14 +64,14 @@ services:
     restart: "on-failure"
     container_name: "NodeJS"
     image: "node:10"
-    user: "${UID}:${GID}"
+    user: "$DOCKER_USER"
     working_dir: /home/node/client
     environment:
       NODE_ENV: "development"
     volumes:
       - ./client:/home/node/client
     ports:
-      - "35729:35729"
+      - "8080:8080"
     command: >
       bash -c "npm install
-      && npm run autobuild"
+      && npm run serve"

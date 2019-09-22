@@ -26,18 +26,18 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker-images/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker-images/nginx/conf.d/client.conf:/etc/nginx/conf.d/client.conf
+      - ./docker-images/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
       - ./server/www:/var/server
       - ./server/logs:/var/log/nginx/server
-      - ./client/public:/var/client
+      - ./client/dist:/var/client
       - ./client/logs:/var/log/nginx/client
-      - ./server/tables:/docker-entrypoint-initdb.d
     links:
-      - mongo
+      - php
   php:
     container_name: "PHP-FPM"
     build: docker-images/php
-    user: "${UID}:${GID}"
+    user: "$DOCKER_USER"
     links:
       - mysql
     volumes:

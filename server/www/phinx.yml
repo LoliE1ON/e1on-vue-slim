@@ -7,7 +7,7 @@ environments:
     default_database: development
     production:
         adapter: mysql
-        host: localhost
+        host: mysql
         name: 'example'
         user: 'example'
         pass: 'example'
@@ -16,7 +16,7 @@ environments:
 
     development:
         adapter: mysql
-        host: localhost
+        host: mysql
         name: 'example'
         user: 'example'
         pass: 'example'
@@ -25,7 +25,7 @@ environments:
 
     testing:
         adapter: mysql
-        host: localhost
+        host: mysql
         name: 'example'
         user: 'example'
         pass: 'example'

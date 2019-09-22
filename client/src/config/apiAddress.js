@@ -1,1 +1,1 @@
-export const API_ADDRESS = 'api.server.name'
+export const API_ADDRESS = 'api.e1on.loc'

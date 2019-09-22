@@ -2,6 +2,9 @@
 client/node_modules
 client/dist
 server/www/vendor
+client/logs
+server/logs
+server/mysql
 
 # local env files
 .env.local
@@ -21,4 +24,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-server/mysql

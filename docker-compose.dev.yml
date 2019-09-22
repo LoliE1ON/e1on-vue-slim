@@ -24,7 +24,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8089:8089"
+      - "8080:8080"
     links:
       - mysql
 
@@ -70,7 +70,7 @@ services:
     volumes:
       - ./client:/home/node/client
     ports:
-      - "8080:8080"
+      - "8081:8081"
     command: >
       bash -c "npm install
       && npm run serve"

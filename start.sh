@@ -34,6 +34,7 @@ else
   # В случае с prod, нужно собрать файлы клиента в nodeJS на стадии сборки docker
   # В prod среде нет nodeJS.
   docker run --rm --interactive --tty \
+    -u "${UID}:${GID}"
     -v "$CLIENT_PATH":/app \
     -w "/app" \
     node \
@@ -55,6 +56,7 @@ sed -ri "s/pass[^;]*/pass: '${MYSQL_PASSWORD}'/" server/www/phinx.yml
 
 # Сборка сервера, установка зависимостей в отдельном composer контейнере
 docker run --rm --interactive --tty \
+  -u "${UID}:${GID}"
   -v "$COMPOSER_MANIFEST_PATH":/app \
   composer install --ignore-platform-reqs
 

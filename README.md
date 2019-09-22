@@ -54,7 +54,7 @@ alias composer='docker run --rm --interactive --tty --user "${UID}:${GID}" --vol
 Так же, нужно добавить записи в hosts равные SERVER_NAME_CLIENT и SERVER_NAME_SERVER.
 
 # Сервисы
-Adminer - http://localhost:8000
+Adminer - http://localhost:8080
 
 При запуске dev среды, запускается live-reload файлов и dev-server.
 При запуске prod среды, никаких live reload нет как и ноды вообще, собирается проект в папку dist и отдаётся уже через nginx

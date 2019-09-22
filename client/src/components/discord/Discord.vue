@@ -67,7 +67,7 @@ export default {
 
             // get data from api
             axios.get(
-                discordConfig.API_WIDGET_URL,
+                discordConfig.API_WIDGET_URL
             )
             .then(response => {
                 this.serverName = response.data.name;
@@ -104,6 +104,7 @@ export default {
     },
     watch: {
         user () {
+			this.adminUsers = [];
             this.responce();
         }
     }

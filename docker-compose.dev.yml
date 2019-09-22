@@ -24,7 +24,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8000:8000"
+      - "8089:8089"
     links:
       - mysql
 
@@ -45,7 +45,6 @@ services:
       - node
   php:
     container_name: "PHP-FPM"
-    user: "$DOCKER_USER"
     restart: always
     build: docker-images/php
     links:

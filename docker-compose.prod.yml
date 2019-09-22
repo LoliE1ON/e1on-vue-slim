@@ -37,7 +37,6 @@ services:
   php:
     container_name: "PHP-FPM"
     build: docker-images/php
-    user: "$DOCKER_USER"
     links:
       - mysql
     volumes:

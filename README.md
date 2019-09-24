@@ -32,8 +32,9 @@ sudo apt-get install docker docker-compose
 Phinx используется для запуска миграций базы данных в контейнере сервера. Алиас выглядит так:
 
 ``
-alias phinx='docker run --rm -u "$UID" --network=e1on-web_default -v "$PWD:/app" eko3alpha/docker-phinx'
+alias phinx='docker run --rm -u "$UID" --network=loli_network -v "$PWD:/app" eko3alpha/docker-phinx'
 ``
+В случае изменения переменной ``DOCKER_NETWORK_NAME`` в start.sh, у алиаса так же нужно изменить параметр network
 
 ### composer
 

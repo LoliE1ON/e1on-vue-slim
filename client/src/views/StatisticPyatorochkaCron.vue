@@ -29,7 +29,6 @@
 				// query user auth
 				axios.get(
 					this.$root.api.API_BASEURL +
-					this.$root.api.API_CONTROLLER +
 					this.$root.api.API_PYATEROCHKA_STATISTICSWEEK,
 				)
 				.then(response => {

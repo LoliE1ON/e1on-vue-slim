@@ -7,7 +7,6 @@ use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
 return function (ContainerBuilder $containerBuilder) {
 

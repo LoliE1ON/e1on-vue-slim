@@ -15,11 +15,11 @@ class AuthAction extends Action
     protected function action(): Response
     {  
         
-        
         $users = UsersModel::all();
 
         $data = ['users' => $users];
         return $this->respondWithData(json_encode($data));
 
     }
+
 }

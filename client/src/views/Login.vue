@@ -65,7 +65,6 @@ export default {
             // query user auth
             axios.post(
                 this.$root.api.API_BASEURL +
-                this.$root.api.API_CONTROLLER +
                 this.$root.api.API_AUTH_GETTOKEN,
                 {
                         login: this.login,

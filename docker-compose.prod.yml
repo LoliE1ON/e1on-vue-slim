@@ -46,7 +46,9 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_SERVER: ${MYSQL_SERVER}
-
+      SERVER_NAME_CLIENT: ${SERVER_NAME_CLIENT}
+      SERVER_NAME_SERVER: ${SERVER_NAME_SERVER}
+      
 networks:
   default:
     external:

@@ -7,8 +7,10 @@ use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 return function (ContainerBuilder $containerBuilder) {
+
     $containerBuilder->addDefinitions([
         LoggerInterface::class => function (ContainerInterface $c) {
             $settings = $c->get('settings');
@@ -25,4 +27,5 @@ return function (ContainerBuilder $containerBuilder) {
             return $logger;
         },
     ]);
+
 };

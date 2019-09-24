@@ -32,6 +32,10 @@ $repositories($containerBuilder);
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
+// Starting ORM
+$orm = require __DIR__ . '/../app/orm.php';
+$orm($container);
+
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();

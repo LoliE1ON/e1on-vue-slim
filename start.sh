@@ -16,6 +16,8 @@ if [ -z "$WORKSPACE" ] || [ "$WORKSPACE" != 'prod' ]; then
   WORKSPACE="dev"
 fi
 
+# Имя сети создаваемое докером
+export DOCKER_NETWORK_NAME="loli_network"
 # Docker юзер
 export DOCKER_USER="$UID:$GID"
 # Путь к файлам сервера
@@ -24,6 +26,8 @@ SERVER_PATH="$PWD/server"
 CLIENT_PATH="$PWD/client"
 # Путь к файлу манифеста composer
 COMPOSER_MANIFEST_PATH="$SERVER_PATH/www"
+
+docker network create $DOCKER_NETWORK_NAME
 
 if [ "$WORKSPACE" == 'dev' ]; then
   # Указываем путь к описанию сборки среды

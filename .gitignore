@@ -5,6 +5,7 @@ server/www/vendor
 client/logs
 server/logs
 server/mysql
+server/www/logs
 
 # local env files
 .env.local

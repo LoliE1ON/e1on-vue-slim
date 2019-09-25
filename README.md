@@ -15,9 +15,12 @@ sudo apt-get install docker docker-compose
 
 ``sudo usermod -aG docker $USER``
 
-На всякий случай настроить на docker.sock ACL, у меня без этого не выходило:
+Обновляем группы
+``newgrp docker ``
 
-``sudo setfacl -m user:"$USER":rw /var/run/docker.sock``
+Далее нужно запустить и опционально добавить его в автозагрузку:
+``service docker start``
+``service docker enable``
 
 Проверить успех можно выполнив: ``docker run hello-world``, если не вывалит сразу ошибку - всё хорошо.
 

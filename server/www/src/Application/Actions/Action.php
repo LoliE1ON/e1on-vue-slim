@@ -115,6 +115,12 @@ abstract class Action
     {
         $json = json_encode($payload, JSON_PRETTY_PRINT);
         $this->response->getBody()->write($json);
+
+        $this->response
+                ->withHeader('Access-Control-Allow-Origin', '*')
+                ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+
         return $this->response->withHeader('Content-Type', 'application/json');
     }
 }

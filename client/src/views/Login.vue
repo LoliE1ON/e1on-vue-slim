@@ -69,7 +69,7 @@ export default {
                 {
                         login: this.login,
                         password: this.password
-                }
+                },
             )
             .then(response => {
 

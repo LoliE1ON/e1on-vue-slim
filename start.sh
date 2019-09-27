@@ -6,6 +6,12 @@ if ! type "docker-compose" > /dev/null; then
   exit 1
 fi
 
+# Чекаем, есть ли .env файл
+if [ ! -f ".env" ]; then
+echo ".env file does not exist"
+exit 1
+fi
+
 # Инжект переменных окружения
 source .env
 

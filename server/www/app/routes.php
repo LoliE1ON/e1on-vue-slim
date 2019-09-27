@@ -7,17 +7,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
-use App\Application\Actions\Auth\AuthAction;
+use App\Application\Actions\Auth\Token;
 
 return function (App $app) {
     $container = $app->getContainer();
 
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
-        return $response;
-    });
-
-    $app->any('/auth/getToken', AuthAction::class);
+    $app->any('/auth/getToken', Token::class);
 
     /*
     $app->group('/users', function (Group $group) use ($container) {

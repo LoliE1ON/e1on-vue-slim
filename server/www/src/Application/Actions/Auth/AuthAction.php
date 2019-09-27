@@ -18,6 +18,7 @@ class AuthAction extends Action
         $users = UsersModel::all();
 
         $data = ['users' => $users];
+        $this->response->withStatus(404);
         return $this->respondWithData(json_encode($data));
 
     }

@@ -3,6 +3,7 @@ app/client/node_modules
 app/client/dist
 app/server/vendor
 volumes
+app/client/.env.local
 docker/nginx/working
 
 # local env files

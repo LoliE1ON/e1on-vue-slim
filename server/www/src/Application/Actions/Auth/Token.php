@@ -17,7 +17,7 @@ class Token extends Action
     {  
 
         $contents = json_decode(file_get_contents('php://input'), true);
-        echo var_dump($contents);
+        //echo var_dump($contents);
 
         $users = UsersModel::all();
 

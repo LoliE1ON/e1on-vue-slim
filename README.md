@@ -39,7 +39,7 @@ alias phinx='docker run --rm -u "$UID" --network=e1on_web_network -v "$PWD:/app"
 ``
 В случае изменения переменной ``DOCKER_NETWORK_NAME`` в start.sh, у алиаса так же нужно изменить параметр network
 
-### composer
+### Сomposer
 
 Composer - менеджер пакетов для PHP. В случае, например, когда composer ругается на то, что не хватает какого-то PHP расширения, но в контейнере сервера оно есть, используй ключ ``--ignore-platform-reqs``
 

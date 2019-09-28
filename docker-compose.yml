@@ -39,6 +39,8 @@ services:
         - ./app/client:/home/node/client
       environment:
         NODE_ENV: "development"
+        SERVER_NAME_SERVER: ${SERVER_NAME_SERVER}
+        SERVER_NAME_CLIENT: ${SERVER_NAME_CLIENT}
       ports:
         - "8081:8081"
       command: >

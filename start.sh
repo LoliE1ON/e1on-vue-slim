@@ -28,6 +28,17 @@ sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_CLIENT};/" "$NGINX_CONFIG
 sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_SERVER};/" "$NGINX_CONFIGS/working/server.conf"
 # Build nginx configs end
 
+# Build ENV for Vue
+export VUE_ENV="app/client/.env.local"
+
+if [ -f "$VUE_ENV" ]; then
+  rm "$VUE_ENV"
+fi
+
+echo "VUE_APP_SERVER_ADDRESS=$SERVER_NAME_SERVER" >> "$VUE_ENV"
+echo "VUE_APP_CLIENT_ADDRESS=$SERVER_NAME_CLIENT" >> "$VUE_ENV"
+# Build ENV for Vue end
+
 # Прокидывание данных в конфигурацию Sphix для доступа к базе данных
 sed -ri "s/name[^;]*/name: '${MYSQL_DATABASE}'/" "$SERVER_PATH/phinx.yml"
 sed -ri "s/user[^;]*/user: '${MYSQL_USER}'/" "$SERVER_PATH/phinx.yml"

@@ -26,11 +26,7 @@ fi
 
 sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_CLIENT};/" "$NGINX_CONFIGS/working/client.conf"
 sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_SERVER};/" "$NGINX_CONFIGS/working/server.conf"
-
 # Build nginx configs end
-
-# Прокидывание адреса сервера в конфиг клиента
-echo "export const API_ADDRESS = '${SERVER_NAME_SERVER}'" > app/client/src/config/apiAddress.js
 
 # Прокидывание данных в конфигурацию Sphix для доступа к базе данных
 sed -ri "s/name[^;]*/name: '${MYSQL_DATABASE}'/" "$SERVER_PATH/phinx.yml"

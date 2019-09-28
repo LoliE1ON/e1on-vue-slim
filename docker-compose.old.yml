@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mysql:
-    container_name: "MySQL"
+    container_name: "E1ON_WEB_MySQL"
     image: mysql
     ports:
       - "3306:3306"

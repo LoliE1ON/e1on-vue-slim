@@ -16,7 +16,7 @@ services:
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       volumes:
-        - mysql-data:/var/lib/mysql
+        - ./volumes/mysql:/var/lib/mysql
 
     php:
       restart: always
@@ -71,9 +71,6 @@ services:
         - mysql
       environment:
         ADMINER_DEFAULT_SERVER: mysql
-
-volumes:
-  mysql-data:
 
 networks:
   default:

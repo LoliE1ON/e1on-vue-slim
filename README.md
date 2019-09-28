@@ -37,7 +37,6 @@ Phinx используется для запуска миграций базы �
 ``
 alias phinx='docker run --rm -u "$UID" --network=e1on_web_network -v "$PWD:/app" eko3alpha/docker-phinx'
 ``
-В случае изменения переменной ``DOCKER_NETWORK_NAME`` в start.sh, у алиаса так же нужно изменить параметр network
 
 ### Сomposer
 

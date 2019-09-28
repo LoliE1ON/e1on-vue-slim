@@ -47,8 +47,6 @@
 			Breadcrumb
 		},
 		mounted () {
-			console.log(process.env);
-
 			this.skeleton = !this.$route.meta.hideSkeleton;
 				console.log (this.$route.meta.hideSkeleton);
 			if (typeof this.$route.meta.hideSkeleton === Boolean) {

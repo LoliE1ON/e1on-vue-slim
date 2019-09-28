@@ -15,12 +15,13 @@ source .env
 export DOCKER_USER="$UID:$GID"
 export SERVER_PATH="$PWD/app/server"
 export CLIENT_PATH="$PWD/app/client"
-export COMPOSER_MANIFEST_PATH="$SERVER_PATH/www"
 export NGINX_CONFIGS="./docker/nginx"
+
+docker network create e1on_web_network
 
 # Build nginx configs
 if [ ! -d "docker/nginx/working" ]; then
-  cp "$NGINX_CONFIGS/original" "$NGINX_CONFIGS/working"
+  cp -r "$NGINX_CONFIGS/original" "$NGINX_CONFIGS/working"
 fi
 
 sed -ri "s/server_name[^;]*;/server_name ${SERVER_NAME_CLIENT};/" "$NGINX_CONFIGS/working/client.conf"
@@ -39,7 +40,7 @@ sed -ri "s/pass[^;]*/pass: '${MYSQL_PASSWORD}'/" "$SERVER_PATH/phinx.yml"
 # Сборка сервера, установка зависимостей в отдельном composer контейнере
 docker run --rm --interactive --tty \
   -u "${UID}:${GID}" \
-  -v "$COMPOSER_MANIFEST_PATH":/app \
+  -v "$SERVER_PATH":/app \
   composer install --ignore-platform-reqs
 
 # Запуск и сборка контейнеров

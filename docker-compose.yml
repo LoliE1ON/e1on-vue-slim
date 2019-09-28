@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    mysql:
+      image: mysql:latest
+      ports:
+        - "3306:3306"
+      networks:
+        - e1web_network
+      command: [
+        '--default_authentication_plugin=mysql_native_password',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci'
+      ]
+      environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      volumes:
+        - mysql-data:/var/lib/mysql
+
+    nginx:
+      image: nginx:latest
+      ports:
+        - "80:80"
+        - "443:443"
+      networks:
+        - e1web_network
+
+
+volumes:
+  mysql-data:
+
+networks:
+  e1web_network:

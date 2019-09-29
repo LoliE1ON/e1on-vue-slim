@@ -27,6 +27,7 @@ return function (App $app) {
     
     $app->add(function ($request, $handler) {
         $response = $handler->handle($request);
+        
         return $response
                 ->withHeader('Access-Control-Allow-Origin', $_ENV['SERVER_NAME_CLIENT'])
                 ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')

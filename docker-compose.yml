@@ -1,0 +1,78 @@
+version: '3'
+
+services:
+    mysql:
+      image: mysql:latest
+      ports:
+        - "3306:3306"
+      command: [
+        '--default_authentication_plugin=mysql_native_password',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci'
+      ]
+      environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      volumes:
+        - ./volumes/mysql:/var/lib/mysql
+
+    php:
+      restart: always
+      build: docker/php
+      links:
+        - mysql
+      env_file:
+        - .env
+      ports:
+        - 10000
+      volumes:
+        - ./app/server:/var/server
+
+    node:
+      restart: always
+      image: "node:10"
+      user: "$DOCKER_USER"
+      working_dir: /home/node/client
+      volumes:
+        - ./app/client:/home/node/client
+      environment:
+        NODE_ENV: "development"
+        SERVER_NAME_SERVER: ${SERVER_NAME_SERVER}
+        SERVER_NAME_CLIENT: ${SERVER_NAME_CLIENT}
+      ports:
+        - "8081:8081"
+      command: >
+        bash -c "npm install
+        && npm run serve"
+
+    nginx:
+      restart: always
+      image: nginx:latest
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - ./docker/nginx/working:/etc/nginx/conf.d/
+        - ./app/server:/var/server
+        - ./volumes/server/logs:/var/log/nginx/server
+        - ./volumes/client/logs:/var/log/nginx/client
+      links:
+        - php
+        - node
+
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - "8080:8080"
+      links:
+        - mysql
+      environment:
+        ADMINER_DEFAULT_SERVER: mysql
+
+networks:
+  default:
+    external:
+      name: e1on_web_network

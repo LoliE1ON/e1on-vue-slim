@@ -27,15 +27,17 @@
 			generateData () {
 
 				// query user auth
-				axios.get(
+				axios.post(
 					this.$root.api.API_BASEURL +
-					this.$root.api.API_PYATEROCHKA_STATISTICSWEEK,
+					"world/statistic", {
+						worldId: 'wrld_c5796060-01b4-49af-a555-1ee3a4af8503'
+					}
 				)
 				.then(response => {
 
-					if(response.data.status === 'successfully') {
-
-						this.statistics.push(...response.data.statistics);
+					if(response.status === 200) {
+						let statistics = JSON.parse(response.data.data).statistics;
+						this.statistics.push(...statistics);
 						this.statistics.forEach((statistic, key) => {
 							this.statistics[key].date = new Date(statistic.date*1000);
 						});
@@ -53,37 +55,39 @@
 
 				console.log ("update", this.statistics);
 
+				// Create chart
 				let chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart);
+				chart.paddingRight = 20;
 
-				// Add data
 				chart.data = this.statistics;
 
-				// Create axes
 				let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-				dateAxis.renderer.minGridDistance = 50;
+				dateAxis.baseInterval = {
+					"timeUnit": "minute",
+					"count": 1
+				};
+				dateAxis.tooltipDateFormat = "HH:mm, d MMMM";
 
 				let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+				valueAxis.tooltip.disabled = true;
+				valueAxis.title.text = "Unique visitors";
 
-				// Create series
 				let series = chart.series.push(new am4charts.LineSeries());
-				series.dataFields.valueY = "visits";
 				series.dataFields.dateX = "date";
-				series.strokeWidth = 2;
-				series.minBulletDistance = 10;
-				series.tooltipText = "{valueY}";
-				series.tooltip.pointerOrientation = "vertical";
-				series.tooltip.background.cornerRadius = 20;
-				series.tooltip.background.fillOpacity = 0.5;
-				series.tooltip.label.padding(12,12,12,12)
+				series.dataFields.valueY = "visits";
+				series.tooltipText = "Visits: [bold]{valueY}[/]";
+				series.fillOpacity = 0.3;
 
-				// Add scrollbar
+
+				chart.cursor = new am4charts.XYCursor();
+				chart.cursor.lineY.opacity = 0;
 				chart.scrollbarX = new am4charts.XYChartScrollbar();
 				chart.scrollbarX.series.push(series);
 
-				// Add cursor
-				chart.cursor = new am4charts.XYCursor();
-				chart.cursor.xAxis = dateAxis;
-				chart.cursor.snapToSeries = series;
+
+				chart.events.on("datavalidated", function () {
+					dateAxis.zoom({start:0.8, end:1});
+				});
 
 				this.chart = chart;
 

@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CreateTableStatistics extends AbstractMigration
+class VrchatTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -28,11 +28,25 @@ class CreateTableStatistics extends AbstractMigration
      */
     public function change()
     {
-        $statistics = $this->table('statistics');
-
-        $statistics->addColumn('time', 'string', ['limit' => 20])
-            ->addColumn('visits', 'string', ['limit' => 10])
-            ->addColumn('worldId', 'string', ['limit' => 50])
+        $statistics = $this->table('vrchat');
+        $statistics->addColumn('auth', 'string', ['limit' => 100])
+            ->addColumn('apiKey', 'string', ['limit' => 100])
+            ->addColumn('login', 'string', ['limit' => 100])
+            ->addColumn('password', 'string', ['limit' => 100])
             ->create();
+
+        // inserting only one row
+        $singleRow = [
+            'id'    => 1,
+            'auth'  => '',
+            'apiKey' => 'JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26',
+            'login' => 'Loli E1ON',
+            'password' => ''
+        ];
+
+        $table = $this->table('vrchat');
+        $table->insert($singleRow);
+        $table->saveData();
+
     }
 }

@@ -78,11 +78,12 @@ export default {
                 this.loginButtonText = "";
 
                 // auth
-                if (typeof response.data.user === "object") {
+                if (response.status === 200) {
 
-                        User.commit("save", response.data.user);
-                        User.commit("changeIsLogged", true);
-                        this.$router.push('dashboard');
+                    let data = JSON.parse(response.data.data);
+                    User.commit("save", data.user);
+                    User.commit("changeIsLogged", true);
+                    this.$router.push('dashboard');
 
                 } else this.loginStatus = true;
 

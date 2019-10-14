@@ -6,7 +6,7 @@
 
 			<div class="uk-grid-collapse" uk-grid>
 
-				<div class="uk-width-1-4 app-sidebar" uk-height-viewport="expand: true" v-show="skeleton">
+				<div class="uk-visible@s app-sidebar" uk-height-viewport="expand: true" v-show="skeleton">
 					<Sidebar/>
 				</div>
 
@@ -17,13 +17,19 @@
 				
 			</div>
 
-			<Footer v-show="skeleton"/>
+			<!--<Footer v-show="skeleton"/>-->
 
     	</div>
 
     </div>
         
 </template>
+
+<style>
+	.app-sidebar {
+		width: 300px;
+	}
+</style>
 
 <script>
 

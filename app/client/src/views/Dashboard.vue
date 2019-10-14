@@ -10,19 +10,7 @@
 
         <div class="uk-card uk-card-default uk-card-body">
 
-            <ul uk-tab>
-                <li><a href="#">Overview</a></li>
-                <li><a href="#">Statistics</a></li>
-            </ul>
-
-            <ul class="uk-switcher uk-margin">
-                <li>
-                    <VrchatWorlds :displayTitle="false"/>
-                </li>
-                <li>
-                    Statistics
-                </li>
-            </ul>
+            <Worlds></Worlds>
 
         </div>
 
@@ -31,18 +19,20 @@
 
 <script>
 
-import VrchatWorlds from '../components/vrchat/Worlds'
+    import Worlds from "../components/vrchat/Worlds";
 
-export default {
-     name: "Dashboard",
-     data: function() {
-          return {
-             
-          };
-     },
-     methods: {
-        
-     },
-     components: {VrchatWorlds}
-};
+    export default {
+         name: "Dashboard",
+         data: function() {
+              return {
+
+              };
+         },
+         methods: {
+
+         },
+        components: {
+             Worlds
+        }
+    };
 </script>

@@ -8,18 +8,20 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Actions\Auth\Token;
+use App\Application\Actions\World\Statistic;
+use App\Application\Actions\Vrchat\ApiOnlinePlayers;
+use \App\Application\Actions\Vrchat\World;
 
 return function (App $app) {
+
     $container = $app->getContainer();
 
-    $app->any('/auth/getToken', Token::class);
+    $app->post('/auth/getToken', Token::class);
+    $app->post('/world/statistic', Statistic::class);
+    $app->post('/vrchat/world', World::class);
 
-    /*
-    $app->group('/users', function (Group $group) use ($container) {
-        $group->get('', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
-    });
-    */
+    // Cron
+    $app->get('/vrchat/players', ApiOnlinePlayers::class);
 
     $app->options('/{routes:.+}', function ($request, $response, $args) {
         return $response;

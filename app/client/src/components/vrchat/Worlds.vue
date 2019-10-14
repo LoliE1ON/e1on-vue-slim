@@ -81,19 +81,22 @@ export default {
                     this.$root.api.API_BASEURL +
                     this.$root.api.API_VRCHAT_GETWORLD,
                     {
-                        worldId: worldId,
-                        test: 1
+                        worldId: worldId
                     }
                 )
                 .then(response => {
-                    if (response.data.status === 'successfully') {
-                        Worlds.commit("add", response.data.world);
+
+                    if (response.status === 200) {
+
+                        let data = JSON.parse(response.data.data).data;
+                        Worlds.commit("add", data);
                         this.loading = false;
+
                     }
+
                 });
 
             });
-
         }
     },
     created () {

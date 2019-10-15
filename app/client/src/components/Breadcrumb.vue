@@ -4,7 +4,7 @@
 
         <ul class="uk-breadcrumb">
 
-            <li><router-link to="/"><i class="fas fa-home"></i> Home</router-link></li>
+            <li><router-link to="/"><i class="fas fa-home"></i> Home page</router-link></li>
 
             
             <li v-for="breadcrumb in $route.meta.Breadcrumb" :class="breadcrumb.pathClass">

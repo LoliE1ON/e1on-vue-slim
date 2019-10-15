@@ -37,8 +37,8 @@ export default {
     data: function() {
         return {
             // user enter data
-            login: "loli",
-            password: "qwerty1",
+            login: "",
+            password: "",
 
             wait: false,
             loginStatus: false,

@@ -70,12 +70,12 @@
 
                 let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
                 valueAxis.tooltip.disabled = true;
-                valueAxis.title.text = "Unique visitors";
+                valueAxis.title.text = "Activity Statistics";
 
                 let series = chart.series.push(new am4charts.LineSeries());
                 series.dataFields.dateX = "date";
                 series.dataFields.valueY = "visits";
-                series.tooltipText = "Visits: [bold]{valueY}[/]";
+                series.tooltipText = "Online: [bold]{valueY}[/] players";
                 series.fillOpacity = 0.3;
 
 

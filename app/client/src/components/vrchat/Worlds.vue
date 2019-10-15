@@ -14,7 +14,7 @@
         <article v-for="world in worlds" class="uk-comment uk-card uk-card-default uk-card-body uk-card-solid">
             <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
                 <div class="uk-width-auto">
-                    <img class="uk-comment-avatar uk-border-rounded" :src="world.imageUrl" width="250" height="250" alt="">
+                    <img class="uk-comment-avatar uk-border-rounded" :src="world.imageUrl" width="200" height="200" alt="">
                 </div>
                 <div class="uk-width-expand">
                     <h3 class="uk-comment-title uk-margin-remove">
@@ -23,15 +23,15 @@
                         </a>
                     </h3>
 
-                    <ul class="uk-list">
-                        <li class="uk-text-break">
+                    <ul class="uk-list uk-margin-small">
+                        <li class="uk-text-break uk-text-small uk-text-muted">
                             <i class="fas fa-map"></i> {{world.description}}
                         </li>
-                        <li>
-                            <i class="fas fa-star"></i> Favorites <span class="uk-label">{{world.favorites}}</span>
+                        <li class="uk-text-small">
+                            <i class="fas fa-star uk-text-danger"></i> Favorites <span class="uk-label">{{world.favorites}}</span>
                         </li>
-                        <li>
-                            <i class="fas fa-eye"></i> Visits <span class="uk-label">{{world.visits}}</span>
+                        <li class="uk-text-small">
+                            <i class="fas fa-eye uk-text-danger"></i> Visits <span class="uk-label">{{world.visits}}</span>
                         </li>
                     </ul>
 

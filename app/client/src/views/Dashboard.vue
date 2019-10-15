@@ -1,36 +1,25 @@
 <template>
     <div>
-
-        <dl class="uk-description-list">
-
-            <dt>Description term</dt>
-            <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</dd>
-
-        </dl>
-
-        <div class="uk-card uk-card-default uk-card-body">
-
-            <Worlds></Worlds>
-
-        </div>
-
+        <h3>Hello, <b>{{ user.data.login}}</b>!</h3>
+        <Worlds class="uk-margin"></Worlds>
     </div>
 </template>
 
 <script>
 
     import Worlds from "../components/vrchat/Worlds";
+    import User from "../store/user";
 
     export default {
-         name: "Dashboard",
-         data: function() {
-              return {
+        name: "Dashboard",
+        data: function () {
+            return {
+                user: User.state
+            }
+        },
+        methods: {
 
-              };
-         },
-         methods: {
-
-         },
+        },
         components: {
              Worlds
         }

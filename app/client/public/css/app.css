@@ -3,18 +3,12 @@ html {
 }
 .uk-navbar-container:not(.uk-navbar-transparent) {
     background: #ffffff;
-    -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+    border-bottom: 2px solid #e6e6e6;
     z-index: 1;
 }
 .uk-card-default {
     color: #171717;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.06);
-}
-.app-sidebar {
-    background:#ffffff;
-    -webkit-box-shadow: 4px 0.25rem 0.3rem 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 4px 0.25rem 0.3rem 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.15);
 }
 
 .app-sidebar-card-default {
@@ -28,6 +22,9 @@ html {
     box-shadow: 0 0.25rem 0.3rem 8px rgba(0, 0, 0, 0.07);
 }
 
+.app-sidebar {
+    background: rgba(0, 0, 0, 0.06);
+}
 .uk-card-solid {
     border-bottom: 1px solid #e7edf3;
 }
@@ -48,7 +45,11 @@ html {
 .ico-margin-large {
     margin-right:10px;
 }
-
+.uk-label {
+    background: #f3f3f3;
+    color: #f0506e;
+    border: 1px solid #e8e8e8;
+}
 .uk-alert {
     margin-bottom: 0;
     border-bottom: 1px solid #e7edf3;
@@ -57,3 +58,7 @@ html {
      font-size: 1.05rem;
      color: #191919;
  }
+.uk-tab>.uk-active>a {
+    font-weight: bold;
+    color:#000;
+}

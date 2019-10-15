@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-card uk-card-default uk-card-body" style="padding-top: 0!important;">
 
             <span style="font-size: 20px;">
                 <i class="fab fa-discord"></i> {{ serverName }}
@@ -63,7 +63,7 @@ export default {
     },
     methods: {
 
-        responce () {
+        responce() {
 
             // get data from api
             axios.get(
@@ -97,16 +97,8 @@ export default {
         }
 
     },
-    computed: {
-        user () {
-            return User.getters.isLogged;
-        }
-    },
-    watch: {
-        user () {
-			this.adminUsers = [];
-            this.responce();
-        }
+    created () {
+        this.responce();
     }
 
 

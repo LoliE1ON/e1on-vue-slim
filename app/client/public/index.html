@@ -9,15 +9,20 @@
     <link rel="stylesheet" href="<%= BASE_URL %>css/uikit.min.css" />
     <link rel="stylesheet" href="<%= BASE_URL %>css/app.css" />
     <link rel="stylesheet" href="<%= BASE_URL %>css/fontawesome.all.min.css" />
-    
-    <script src="<%= BASE_URL %>js/uikit.min.js"></script>
 
     <title>Home</title>
   </head>
   <body>
+
+    <canvas id="matrix" style="display: block; position: fixed; top: 0; left: 0; z-index: -1;"></canvas>
+
     <noscript>
       <strong>We're sorry but loli doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
   </body>
+
+  <script src="<%= BASE_URL %>js/uikit.min.js"></script>
+  <script src="<%= BASE_URL %>js/zhumarin.matrix.es5.js"></script>
+
 </html>

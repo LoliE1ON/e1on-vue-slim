@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="uk-card uk-card-default uk-card-body app-sidebar-card-default" style="margin-top:15px;">
+        <div class="uk-card uk-card-default uk-card-body">
 
-            <ul class="uk-nav-default" uk-nav>
+            <ul class="uk-nav-default" style="padding-top: 20px;padding-bottom: 20px;" uk-nav>
 
                 <li class="uk-nav-header uk-text-bold">Links</li>
 
@@ -22,6 +22,11 @@
                     <i class="fab fa-discord uk-text-secondary"></i> Discord
                 </a></li>
 
+                <li><a href="https://vrchat.com/home/user/usr_5ae64a0e-3f9c-4cf7-b349-2dfd2a93dcaa" target="_blank">
+                    <i class="fas fa-circle uk-text-secondary"></i> VRChat
+
+                </a></li>
+
                 <li><a href="https://github.com/LoliE1ON" target="_blank">
                     <i class="fab fa-github uk-text-secondary"></i> GitHub
                 </a></li>
@@ -30,7 +35,7 @@
             
         </div>
 
-        <Discord v-show="user.getters.isLogged"></Discord>
+        <Discord></Discord>
         
     </div>
 </template>

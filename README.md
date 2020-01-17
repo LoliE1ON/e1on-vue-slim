@@ -1,3 +1,6 @@
+# Frontend: Vue.js Backend: Slim PHP Framework
+## Launch in Docker
+
 # Установка docker
 Первое, что нужно сделать: поставить 2 пакета docker и docker-compose, например, через apt:
 ``
